@@ -2,6 +2,7 @@
 
 namespace Omnipay\Iyzico\Messages;
 
+use Exception;
 use Omnipay\Common\Exception\InvalidResponseException;
 use Iyzipay\Model\Payment;
 use Iyzipay\Request\RetrievePaymentRequest;
@@ -34,17 +35,17 @@ class PurchaseInfoRequest extends AbstractRequest
         try {
             $options = $this->getOptions();
             Payment::setHttpClient(new IyzicoHttp($this->httpClient));
-            $response = new PurchaseInfoResponse($this, Payment::retrieve($data, $options));
+            $this->response = new PurchaseInfoResponse($this, Payment::retrieve($data, $options));
             /**
              * @var $client IyzicoHttp
              */
             $client = Payment::httpClient();
             $this->setIyzicoUrl($client->getUrl());
             $requestParams = $this->getRequestParams();
-            $response->setServiceRequestParams($requestParams);
+            $this->response->setServiceRequestParams($requestParams);
 
-            return $response;
-        } catch (\Exception $e) {
+            return $this->response;
+        } catch (Exception $e) {
             throw new InvalidResponseException(
                 'Error communicating with payment gateway: ' . $e->getMessage(),
                 $e->getCode()

@@ -34,16 +34,16 @@ class CompletePurchaseRequest extends AbstractRequest
         # make request
         $options = $this->getOptions();
         ThreedsPayment::setHttpClient(new IyzicoHttp($this->httpClient));
-        $response = new CompletePurchaseResponse($this, ThreedsPayment::create($data, $options));
+        $this->response = new CompletePurchaseResponse($this, ThreedsPayment::create($data, $options));
         /**
          * @var $client IyzicoHttp
          */
         $client = ThreedsPayment::httpClient();
         $this->setIyzicoUrl($client->getUrl());
         $requestParams = $this->getRequestParams();
-        $response->setServiceRequestParams($requestParams);
+        $this->response->setServiceRequestParams($requestParams);
 
-        return $response;
+        return $this->response;
     }
 
     public function getConversationId()

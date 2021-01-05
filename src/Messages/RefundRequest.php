@@ -43,16 +43,16 @@ class RefundRequest extends AbstractRequest
         try {
             $options = $this->getOptions();
             Refund::setHttpClient(new IyzicoHttp($this->httpClient));
-            $response = new RefundResponse($this, Refund::create($data, $options));
+            $this->response = new RefundResponse($this, Refund::create($data, $options));
             /**
              * @var $client IyzicoHttp
              */
             $client = Refund::httpClient();
             $this->setIyzicoUrl($client->getUrl());
             $requestParams = $this->getRequestParams();
-            $response->setServiceRequestParams($requestParams);
+            $this->response->setServiceRequestParams($requestParams);
 
-            return $response;
+            return $this->response;
         } catch (Exception $e) {
             throw new InvalidResponseException(
                 'Error communicating with payment gateway: ' . $e->getMessage(),

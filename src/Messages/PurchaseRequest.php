@@ -17,16 +17,16 @@ class PurchaseRequest extends AbstractRequest
         # make request
         $options = $this->getOptions();
         Payment::setHttpClient(new IyzicoHttp($this->httpClient));
-        $response = new PurchaseResponse($this, Payment::create($data, $options));
+        $this->response = new PurchaseResponse($this, Payment::create($data, $options));
         /**
          * @var $client IyzicoHttp
          */
         $client = Payment::httpClient();
         $this->setIyzicoUrl($client->getUrl());
         $requestParams = $this->getRequestParams();
-        $response->setServiceRequestParams($requestParams);
+        $this->response->setServiceRequestParams($requestParams);
 
 
-        return $response;
+        return $this->response;
     }
 }

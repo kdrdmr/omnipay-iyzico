@@ -2,6 +2,7 @@
 
 namespace Omnipay\Iyzico;
 
+use Exception;
 use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\Common\Http\ClientInterface;
 
@@ -28,7 +29,7 @@ class IyzicoHttp
             $this->setUrl($url);
             $request = $this->httpClient->request('POST', $url, $this->transformHeaders($headers), $body);
             return $request->getBody()->getContents();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new InvalidResponseException(
                 'Error communicating with payment gateway: ' . $e->getMessage(),
                 $e->getCode()

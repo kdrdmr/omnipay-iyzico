@@ -73,12 +73,12 @@ class Purchase3dResponse extends AbstractResponse
                 $name_o = $input_tags->item($i)->attributes->getNamedItem('name');
                 /* @var $type_o DOMAttr */
                 $type_o = $input_tags->item($i)->attributes->getNamedItem('type');
-                if (is_object($type_o) && $type_o !== null) {
+                if ($type_o !== null && is_object($type_o)) {
                     if ($type_o->value === 'submit') {
                         continue;
                     }
                 }
-                if (is_object($name_o) && $name_o !== null) {
+                if ($name_o !== null && is_object($name_o)) {
                     $name = $name_o->value;
 
                     /* @var $value_o DOMAttr */

@@ -2,6 +2,7 @@
 
 namespace Omnipay\Iyzico\Messages;
 
+use Exception;
 use Iyzipay\Model\Cancel;
 use Iyzipay\Request\CreateCancelRequest;
 use Omnipay\Common\Exception\InvalidResponseException;
@@ -35,17 +36,17 @@ class CancelPurchaseRequest extends AbstractRequest
         try {
             $options = $this->getOptions();
             Cancel::setHttpClient(new IyzicoHttp($this->httpClient));
-            $response = new CancelPurchaseResponse($this, Cancel::create($data, $options));
+            $this->response = new CancelPurchaseResponse($this, Cancel::create($data, $options));
             /**
              * @var $client IyzicoHttp
              */
             $client = Cancel::httpClient();
             $this->setIyzicoUrl($client->getUrl());
             $requestParams = $this->getRequestParams();
-            $response->setServiceRequestParams($requestParams);
+            $this->response->setServiceRequestParams($requestParams);
 
-            return $response;
-        } catch (\Exception $e) {
+            return $this->response;
+        } catch (Exception $e) {
             throw new InvalidResponseException(
                 'Error communicating with payment gateway: ' . $e->getMessage(),
                 $e->getCode()

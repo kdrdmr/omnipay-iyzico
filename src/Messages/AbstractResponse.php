@@ -2,6 +2,7 @@
 
 namespace Omnipay\Iyzico\Messages;
 
+use Exception;
 use Iyzipay\IyzipayResource;
 use Iyzipay\Model\BasicPaymentResource;
 use Iyzipay\Model\Cancel;
@@ -34,11 +35,16 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
 
     /**
      * @return mixed
-     * @throws \JsonException
+     * @throws Exception
      */
     public function getData()
     {
-        return $this->data = json_decode($this->response->getRawResult(), true, 512, JSON_THROW_ON_ERROR);
+        $res =  $this->data = json_decode($this->response->getRawResult(), true, 512);
+        $lastErr = json_last_error_msg();
+        if(!empty($lastErr) && $lastErr!="No error"){
+            throw new Exception("json_error:". $lastErr);
+        }
+        return $res;
     }
 
     public function getTransactionReference()
