@@ -184,12 +184,12 @@ trait PurchaseRequestTrait
         return $this->getParameter('basketId');
     }
 
-    private function getConnectorName()
+    public function getConnectorName()
     {
         return $this->getParameter('connectorName');
     }
 
-    private function getPosOrderId()
+    public function getPosOrderId()
     {
         return $this->getParameter('posOrderId');
     }
