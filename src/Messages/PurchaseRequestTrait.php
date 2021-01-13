@@ -41,6 +41,8 @@ trait PurchaseRequestTrait
         $request->setPaidPrice($this->getPaidPrice());
         $request->setCurrency($this->getCurrency());
         $request->setInstallment($this->getInstallment());
+        ($this->getConnectorName() !== null) ? $request->setConnectorName($this->getConnectorName()) : null; // ConnectorName is optional
+        ($this->getPosOrderId() !== null) ? $request->setPosOrderId($this->getPosOrderId()) : null; // PosOrderId is optional
         ($this->getBasketId() !== null) ? $request->setBasketId($this->getBasketId()) : null; // BasketId is optional
         ($this->getPaymentChannel() !== null) ? $request->setPaymentChannel($this->getPaymentChannel()) : null; // PaymentChannel is optional
         ($this->getPaymentGroup() !== null) ? $request->setPaymentGroup($this->getPaymentGroup()) : null; // PaymentGroup is optional
@@ -53,6 +55,8 @@ trait PurchaseRequestTrait
         $paymentCard->setExpireYear($card->getExpiryYear());
         $paymentCard->setCvc($card->getCvv());
         ($this->getRegisterCard() !== null) ? $paymentCard->setRegisterCard($this->getRegisterCard()) : null; // RegisterCard is optional
+        ($this->getCardUserKey() !== null) ? $paymentCard->setCardUserKey($this->getCardUserKey()) : null; // RegisterCard is optional
+        ($this->getCardToken() !== null) ? $paymentCard->setCardToken($this->getCardToken()) : null; // RegisterCard is optional
         $request->setPaymentCard($paymentCard);
 
         $buyer = new Buyer();
@@ -180,6 +184,16 @@ trait PurchaseRequestTrait
         return $this->getParameter('basketId');
     }
 
+    private function getConnectorName()
+    {
+        return $this->getParameter('connectorName');
+    }
+
+    private function getPosOrderId()
+    {
+        return $this->getParameter('posOrderId');
+    }
+
     private function getPaymentChannel()
     {
         return $this->getParameter('paymentChannel');
@@ -193,5 +207,15 @@ trait PurchaseRequestTrait
     private function getRegisterCard()
     {
         return $this->getParameter('registerCard');
+    }
+
+    private function getCardUserKey()
+    {
+        return $this->getParameter('cardUserKey');
+    }
+
+    private function getCardToken()
+    {
+        return $this->getParameter('cardToken');
     }
 }
