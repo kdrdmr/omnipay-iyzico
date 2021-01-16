@@ -32,7 +32,6 @@ use RuntimeException;
  * @method RequestInterface completeAuthorize(array $options = array())
  * @method RequestInterface capture(array $options = array())
  * @method RequestInterface fetchTransaction(array $options = [])
- * @method RequestInterface void(array $options = array())
  * @method RequestInterface updateCard(array $options = array())
  */
 class IyzicoGateway extends AbstractGateway
@@ -154,7 +153,7 @@ class IyzicoGateway extends AbstractGateway
      * @param array $parameters
      * @return AbstractRequest
      */
-    public function cancel(array $parameters = array()): AbstractRequest
+    public function void(array $parameters = array()): AbstractRequest
     {
         return $this->createRequest(CancelPurchaseRequest::class, $parameters);
     }

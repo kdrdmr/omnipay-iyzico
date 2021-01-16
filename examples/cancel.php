@@ -11,7 +11,7 @@ $helper = new Helper();
 
 try {
     $params = $helper->getCancelPurchaseParams();
-    $response = $gateway->cancel($params)->send();
+    $response = $gateway->void($params)->send();
 
     $result = [
         'status' => $response->isSuccessful() ?: 0,
