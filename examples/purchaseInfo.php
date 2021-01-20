@@ -11,7 +11,7 @@ $helper = new Helper();
 
 try {
     $params = $helper->getPurchaseInfoParams();
-    $response = $gateway->purchaseInfo($params)->send();
+    $response = $gateway->fetchTransaction($params)->send();
 
     $result = [
         'status' => $response->isSuccessful() ?: 0,

@@ -31,7 +31,6 @@ use RuntimeException;
  * @method NotificationInterface acceptNotification(array $options = array())
  * @method RequestInterface completeAuthorize(array $options = array())
  * @method RequestInterface capture(array $options = array())
- * @method RequestInterface fetchTransaction(array $options = [])
  * @method RequestInterface updateCard(array $options = array())
  */
 class IyzicoGateway extends AbstractGateway
@@ -135,7 +134,7 @@ class IyzicoGateway extends AbstractGateway
      * @param array $parameters
      * @return AbstractRequest
      */
-    public function purchaseInfo(array $parameters = array()): AbstractRequest
+    public function fetchTransaction(array $parameters = array()): AbstractRequest
     {
         return $this->createRequest(PurchaseInfoRequest::class, $parameters);
     }
