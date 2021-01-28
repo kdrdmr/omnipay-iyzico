@@ -18,9 +18,10 @@ class ReportingPaymentDetailRequest extends AbstractRequest
     public function getData(): \Omnipay\Iyzico\Requests\ReportingPaymentDetailRequest
     {
         $request = new \Omnipay\Iyzico\Requests\ReportingPaymentDetailRequest();
-        $request->setLocale($this->getLocale());
+        //$request->setLocale($this->getLocale());
         $request->setPaymentId($this->getPaymentId());
-        $request->setConversationId($this->getPaymentConversationId());
+        $request->setPaymentConversationId($this->getPaymentConversationId());
+        //$request->setConversationId($this->getPaymentConversationId());
 
         $this->setRequestParams($this->transformIyzicoRequest($request));
 
