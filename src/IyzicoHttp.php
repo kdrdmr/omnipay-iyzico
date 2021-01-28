@@ -36,6 +36,25 @@ class IyzicoHttp
             );
         }
     }
+    /**
+     * @param string $url
+     * @param array $headers
+     * @return string
+     * @throws InvalidResponseException
+     */
+    public function getV2(string $url, array $headers): string
+    {
+        try {
+            $this->setUrl($url);
+            $request = $this->httpClient->request('GET', $url, $this->transformHeaders($headers));
+            return $request->getBody()->getContents();
+        } catch (Exception $e) {
+            throw new InvalidResponseException(
+                'Error communicating with payment gateway: ' . $e->getMessage(),
+                $e->getCode()
+            );
+        }
+    }
 
     public function setUrl(string $url): void
     {
