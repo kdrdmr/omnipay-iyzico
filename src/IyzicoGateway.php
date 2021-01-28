@@ -15,7 +15,6 @@ use Omnipay\Common\Message\RequestInterface;
 use Omnipay\Iyzico\Messages\Purchase3dRequest;
 use Omnipay\Iyzico\Messages\PurchaseRequest;
 use Omnipay\Iyzico\Messages\CompletePurchaseRequest;
-use Omnipay\Iyzico\Messages\PurchaseInfoRequest;
 use Omnipay\Iyzico\Messages\RefundRequest;
 use Omnipay\Iyzico\Messages\CancelPurchaseRequest;
 use Omnipay\Iyzico\Messages\CreateCardRequest;
@@ -136,7 +135,7 @@ class IyzicoGateway extends AbstractGateway
      */
     public function fetchTransaction(array $parameters = array()): AbstractRequest
     {
-        return $this->createRequest(PurchaseInfoRequest::class, $parameters);
+        return $this->createRequest(Messages\ReportingPaymentDetailRequest::class, $parameters);
     }
 
     /**
