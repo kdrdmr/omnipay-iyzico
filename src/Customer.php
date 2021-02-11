@@ -13,7 +13,7 @@ class Customer
     /**
      * Create a new Customer object using the specified parameters
      *
-     * @param array $parameters An array of parameters to set on the new object
+     * @param array|null $parameters An array of parameters to set on the new object
      */
     public function __construct($parameters = null)
     {

@@ -8,3 +8,4 @@ phpunit.xml
 /.idea/
 src/.DS_Store
 .DS_Store
+/phpunit.phar

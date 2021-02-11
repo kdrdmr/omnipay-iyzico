@@ -1,7 +1,5 @@
 <?php
 
-namespace Examples;
-
 use Iyzipay\Model\BasketItemType;
 use Iyzipay\Model\Locale;
 

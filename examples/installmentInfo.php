@@ -1,10 +1,9 @@
 <?php
 
-$loader = require __DIR__ . '/vendor/autoload.php';
-$loader->addPsr4('Examples\\', __DIR__);
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once (__DIR__ . "/Helper.php");
 
 use Omnipay\Iyzico\IyzicoGateway;
-use Examples\Helper;
 
 $gateway = new IyzicoGateway();
 $helper = new Helper();
@@ -23,5 +22,5 @@ try {
 
     print("<pre>" . print_r($result, true) . "</pre>");
 } catch (Exception $e) {
-    throw new \RuntimeException($e->getMessage());
+    throw new RuntimeException($e->getMessage());
 }

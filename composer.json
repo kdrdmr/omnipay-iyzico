@@ -1,8 +1,8 @@
 {
-  "name": "alegra/omnipay-iyzico",
+  "name": "flo/omnipay-iyzico",
   "type": "library",
   "description": "Iyzico gateway for Omnipay payment processing library",
-  "homepage": "https://github.com/alegraio/omnipay-iyzico",
+  "homepage": "https://git.flo.com.tr/3rd-party-libraries/omnipay-iyzico",
   "license": "MIT",
   "autoload": {
     "psr-4": {

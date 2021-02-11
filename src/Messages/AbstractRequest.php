@@ -155,7 +155,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest i
     protected function updateValue(&$data, $key): void
     {
         $sensitiveData = $this->getSensitiveData();
-        if (\in_array($key, $sensitiveData, true)) {
+        if (in_array($key, $sensitiveData, true)) {
             $data = IzyicoHelper::mask($data);
         }
     }
