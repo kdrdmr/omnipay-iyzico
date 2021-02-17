@@ -218,4 +218,27 @@ trait PurchaseRequestTrait
     {
         return $this->getParameter('cardToken');
     }
+
+    /**
+     * Sets the card reference.
+     *
+     * @param  $value
+     * @return $this
+     */
+    public function setPosOrderId($value)
+    {
+        return $this->setParameter('posOrderId', $value);
+    }
+
+    /**
+     * Sets the card reference.
+     *
+     * @param  $value
+     * @return $this
+     */
+    public function setConnectorName($value)
+    {
+        return $this->setParameter('connectorName', $value);
+    }
+
 }
