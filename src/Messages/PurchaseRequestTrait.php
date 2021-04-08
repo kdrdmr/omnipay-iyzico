@@ -49,14 +49,20 @@ trait PurchaseRequestTrait
         (!empty($this->getCallBackUrl())) ? $request->setCallbackUrl($this->getCallBackUrl()) : null;
 
         $paymentCard = new PaymentCard();
-        $paymentCard->setCardHolderName($card->getName());
-        $paymentCard->setCardNumber($card->getNumber());
-        $paymentCard->setExpireMonth($card->getExpiryMonth());
-        $paymentCard->setExpireYear($card->getExpiryYear());
-        $paymentCard->setCvc($card->getCvv());
-        ($this->getRegisterCard() !== null) ? $paymentCard->setRegisterCard($this->getRegisterCard()) : null; // RegisterCard is optional
-        ($this->getCardUserKey() !== null) ? $paymentCard->setCardUserKey($this->getCardUserKey()) : null; // RegisterCard is optional
-        ($this->getCardToken() !== null) ? $paymentCard->setCardToken($this->getCardToken()) : null; // RegisterCard is optional
+
+        if($this->getCardToken() !== null){
+            $paymentCard->setCardToken($this->getCardToken()); // RegisterCard is optional
+            if($this->getCardUserKey() !== null) {
+                $paymentCard->setCardUserKey($this->getCardUserKey()); // RegisterCard is optional
+            }
+        } else{
+            $paymentCard->setCardHolderName($card->getName());
+            $paymentCard->setCardNumber($card->getNumber());
+            $paymentCard->setExpireMonth($card->getExpiryMonth());
+            $paymentCard->setExpireYear($card->getExpiryYear());
+            $paymentCard->setCvc($card->getCvv());
+            ($this->getRegisterCard() !== null) ? $paymentCard->setRegisterCard($this->getRegisterCard()) : null; // RegisterCard is optional
+        }
         $request->setPaymentCard($paymentCard);
 
         $buyer = new Buyer();
@@ -217,6 +223,16 @@ trait PurchaseRequestTrait
     private function getCardToken()
     {
         return $this->getParameter('cardToken');
+    }
+
+    public function setCardUserKey($cardUserKey)
+    {
+        return $this->setParameter('cardUserKey', $cardUserKey);
+    }
+
+    public function setCardToken($cardToken)
+    {
+        return $this->setParameter('cardToken', $cardToken);
     }
 
     /**
