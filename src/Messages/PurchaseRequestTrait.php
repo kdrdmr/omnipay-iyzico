@@ -49,12 +49,11 @@ trait PurchaseRequestTrait
         (!empty($this->getCallBackUrl())) ? $request->setCallbackUrl($this->getCallBackUrl()) : null;
 
         $paymentCard = new PaymentCard();
-
+        if($this->getCardUserKey() !== null) {
+            $paymentCard->setCardUserKey($this->getCardUserKey()); // RegisterCard is optional
+        }
         if($this->getCardToken() !== null){
             $paymentCard->setCardToken($this->getCardToken()); // RegisterCard is optional
-            if($this->getCardUserKey() !== null) {
-                $paymentCard->setCardUserKey($this->getCardUserKey()); // RegisterCard is optional
-            }
         } else{
             $paymentCard->setCardHolderName($card->getName());
             $paymentCard->setCardNumber($card->getNumber());
